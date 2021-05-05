@@ -1,3 +1,3 @@
-# telegram-bots
+# PollenflugBot
 
-some basic bots, written in python
+based on python-telegram-bot
