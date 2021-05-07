@@ -20,7 +20,6 @@ redis structure:
                 "pollen_type": list of int
 """
 
-import logging
 import datetime
 import pytz
 
@@ -28,14 +27,14 @@ from telegram.ext import Updater, CommandHandler, CallbackQueryHandler
 
 from components.admin_tools import admin_reset, stats
 from components.subscription_tools import change_pollen_type_handler, subscribe_handler, unsubscribe
-from components.send_images import today, tomorrow, send_daily_img, daily_img
+from components.send_images import today, tomorrow, send_daily_img, daily_img, sunday
 from components.messaging import (
     send_single_message_handler,
     subscriber_message_handler,
     feedback_handler,
     selected_subscriber
 )
-from components.misc_commands import start, help_command, reset_day, download, reset_today
+from components.misc_commands import start, help_command, reset_day, download #, reset_today
 from components.error_handler import error_handler
 
 

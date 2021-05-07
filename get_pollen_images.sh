@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in 1 2
+for i in "$@"
 do
 	for j in {0..7}
 	do

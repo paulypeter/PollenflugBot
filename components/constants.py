@@ -14,3 +14,6 @@ POLLEN = {
 }
 
 ADMIN = open("admin.txt", "r").read().strip()
+
+DAY = ["today", "tomorrow", "sunday"]
+FORECAST_DAY = ["heutige ", "morgige ", "Sonntags-"]

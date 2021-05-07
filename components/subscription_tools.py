@@ -1,4 +1,5 @@
 """Methods handling subscriptions"""
+from ast import literal_eval
 
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
 from telegram.ext import CommandHandler, CallbackContext, ConversationHandler, CallbackQueryHandler
@@ -31,7 +32,7 @@ def subscribe(update: Update, _: CallbackContext) -> None:
     update.message.reply_text(message_text)
     if state == SET_TYPE:
         if existing_user:
-            pollen_type = eval(r.hget(user_id, "pollen_type"))
+            pollen_type = literal_eval(r.hget(user_id, "pollen_type"))
         else:
             pollen_type = []
         keyboard = pollen_keyboard(pollen_type)
@@ -44,7 +45,7 @@ def change_pollen_type(update: Update, _: CallbackContext) -> int:
     """get selection and start pollen selection"""
     user_id = update.message.from_user.id
     if r.exists(user_id):
-        selection = eval(r.hget(user_id, "pollen_type"))
+        selection = literal_eval(r.hget(user_id, "pollen_type"))
     else:
         selection = []
     keyboard = pollen_keyboard(selection)
@@ -61,7 +62,7 @@ def select_pollen_type(update: Update, _: CallbackContext) -> int:
         return ConversationHandler.END
     user_id = query.from_user.id
     if r.exists(user_id):
-        selection = eval(r.hget(user_id, "pollen_type"))
+        selection = literal_eval(r.hget(user_id, "pollen_type"))
     else:
         selection = []
     pollen_type = int(query.data)
