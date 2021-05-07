@@ -58,7 +58,7 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("heute", today))
     dispatcher.add_handler(CommandHandler("morgen", tomorrow))
     dispatcher.add_handler(CommandHandler("abo_abbestellen", unsubscribe))
-    dispatcher.add_handler(CommandHandler("send_daily_img", send_daily_img))
+    #dispatcher.add_handler(CommandHandler("send_daily_img", send_daily_img))
     dispatcher.add_handler(CommandHandler("admin_reset", admin_reset))
     dispatcher.add_handler(CommandHandler("stats", stats))
 
