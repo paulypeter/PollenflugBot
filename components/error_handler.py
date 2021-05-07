@@ -9,7 +9,7 @@ import traceback
 import logging
 
 from telegram import Update, ParseMode
-from telegram.ext import Updater, CallbackContext, CommandHandler
+from telegram.ext import CallbackContext
 
 from .constants import ADMIN
 

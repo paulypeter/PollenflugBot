@@ -1,6 +1,7 @@
 """Miscellanious commands"""
 
 import subprocess
+import datetime
 
 from telegram import Update, ForceReply
 from telegram.ext import CallbackContext, ConversationHandler
@@ -26,7 +27,10 @@ def cancel(update: Update, _: CallbackContext) -> None:
 
 def download(_: CallbackContext) -> None:
     """download current forecast"""
-    subprocess.call("./get_pollen_images.sh")
+    cmd = ["./get_pollen_images.sh", "1", "2"]
+    if datetime.date.today().weekday() == 4:
+        cmd.append("3")
+    subprocess.call(cmd)
 
 def reset_day(_: CallbackContext) -> None:
     """clear received fields and delete non-subscribers"""
@@ -34,6 +38,7 @@ def reset_day(_: CallbackContext) -> None:
     for user_id in subscribers:
         r.hset(user_id, "received_today", 'false')
         r.hset(user_id, "received_tomorrow", 'false')
+        r.hset(user_id, "received_sunday", 'false')
         if r.hget(user_id, "delete") == 'true':
             r.delete(user_id)
 

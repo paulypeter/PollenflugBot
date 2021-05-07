@@ -50,6 +50,7 @@ def selected_subscriber(update: Update, _: CallbackContext) -> int:
         r.hset(ADMIN, "send_message_to", query.data)
         query.message.reply_text('Bitte Nachricht eingeben:')
         return TYPE_MESSAGE
+    return ConversationHandler.END
 
 def type_message(update: Update, context: CallbackContext) -> int:
     """type a message to selected subscriber"""

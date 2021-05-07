@@ -11,6 +11,7 @@ def admin_reset(update: Update, _: CallbackContext) -> None:
     if str(update.message.from_user.id) == ADMIN:
         r.hset(ADMIN, "received_today", 'false')
         r.hset(ADMIN, "received_tomorrow", 'false')
+        r.hset(ADMIN, "received_sunday", 'false')
         message_text = "Fields reset"
     else:
         message_text = "Sorry, nur für Admins!"
