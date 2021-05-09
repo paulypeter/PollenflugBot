@@ -34,7 +34,7 @@ def send_single_message(update: Update, _: CallbackContext):
     """Admin method: send message to a single user"""
     if str(update.message.from_user.id) != ADMIN:
         return ConversationHandler.END
-    keys = r.keys(pattern="*")
+    keys = r.scan(0)[1]
     keyboard = []
     for key in keys:
         keyboard.append([InlineKeyboardButton(key, callback_data=key)])
@@ -72,7 +72,7 @@ def send_subscriber_message(update: Update, _: CallbackContext) -> None:
 def message_input(update: Update, context: CallbackContext) -> int:
     """type a message to all subscibers"""
     message = "Bleep Bloop\n" + update.message.text
-    subscribers = r.keys(pattern="*")
+    subscribers = r.scan(0)[1]
     for sub in subscribers:
         context.bot.send_message(chat_id=sub, text=message)
     update.message.reply_text('Die Nachricht wurde gesendet!')

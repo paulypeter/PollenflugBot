@@ -45,14 +45,14 @@ def send_daily_img(_: Update, context: CallbackContext) -> None:
 
 def daily_img(context: CallbackContext) -> None:
     """send daily update"""
-    for user_id in r.keys(pattern="*"):
+    for user_id in r.scan(0)[1]:
         pollen_type = literal_eval(r.hget(user_id, "pollen_type"))
         if pollen_type:
             send_one_or_multiple(context, user_id, 1, pollen_type)
 
 def handle_day_forecast(update: Update, context: CallbackContext, user_id, img_num) -> None:
     """ handle forecast request for given day """
-    if str(user_id) in r.keys(pattern="*"):
+    if str(user_id) in r.scan(0)[1]:
         if r.hget(user_id, f"received_{DAY[img_num - 1]}") in ['false', 'None']:
             pollen_type = literal_eval(r.hget(user_id, "pollen_type"))
             if pollen_type:

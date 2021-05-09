@@ -34,7 +34,7 @@ def download(_: CallbackContext) -> None:
 
 def reset_day(_: CallbackContext) -> None:
     """clear received fields and delete non-subscribers"""
-    subscribers = r.keys(pattern="*")
+    subscribers = r.scan(0)[1]
     for user_id in subscribers:
         r.hset(user_id, "received_today", 'false')
         r.hset(user_id, "received_tomorrow", 'false')
