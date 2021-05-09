@@ -20,7 +20,7 @@ def admin_reset(update: Update, _: CallbackContext) -> None:
 def stats(update: Update, _: CallbackContext) -> None:
     """get number of subscribers"""
     if str(update.message.from_user.id) == ADMIN:
-        subscribers = r.keys(pattern="*")
+        subscribers = r.scan(0)[1]
         message_text = f'Es sind {len(subscribers)} Abonnenten eingetragen.'
     else:
         message_text = "Sorry, nur für Admins!"
