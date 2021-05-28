@@ -16,6 +16,7 @@ def subscribe(update: Update, _: CallbackContext) -> None:
         r.hset(user_id, "subscribed", 'true')
         r.hset(user_id, "received_today", 'None')
         r.hset(user_id, "received_tomorrow", 'None')
+        r.hset(user_id, "received_sunday", 'None')
         r.hset(user_id, "delete", 'false')
         r.hset(user_id, "pollen_type", str([2]))
         message_text = "PollenflugBot wurde erfolgreich abonniert."

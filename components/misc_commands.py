@@ -28,7 +28,10 @@ def cancel(update: Update, _: CallbackContext) -> None:
 def download(_: CallbackContext) -> None:
     """download current forecast"""
     cmd = ["./get_pollen_images.sh", "1", "2"]
-    if datetime.date.today().weekday() == 4:
+    if (
+        datetime.date.today().weekday() == 4 and
+        datetime.datetime.now().hour > 10
+    ):
         cmd.append("3")
     subprocess.call(cmd)
 
