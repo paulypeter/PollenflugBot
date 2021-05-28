@@ -33,8 +33,11 @@ def tomorrow(update: Update, context: CallbackContext) -> None:
 
 def sunday(update: Update, context: CallbackContext) -> None:
     """request sunday's forecast"""
-    if datetime.date.today().weekday() != 4:
-        update.message.reply_text("Die Vorhersage gibt es nur freitags.")
+    if (
+        datetime.date.today().weekday() != 4 or
+        (datetime.datetime.now().hour <= 11 and datetime.datetime.now().minute <= 29)
+    ):
+        update.message.reply_text("Die Vorhersage gibt es nur freitags ab 11:30.")
         return
     user_id = update.message.from_user.id
     handle_day_forecast(update, context, user_id, 3)
