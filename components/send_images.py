@@ -35,7 +35,8 @@ def sunday(update: Update, context: CallbackContext) -> None:
     """request sunday's forecast"""
     if (
         datetime.date.today().weekday() != 4 or
-        (datetime.datetime.now().hour <= 11 and datetime.datetime.now().minute <= 29)
+        datetime.datetime.now().hour < 11 or
+        (datetime.datetime.now().hour == 11 and datetime.datetime.now().minute <= 29)
     ):
         update.message.reply_text("Die Vorhersage gibt es nur freitags ab 11:30.")
         return
