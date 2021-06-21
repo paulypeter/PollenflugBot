@@ -83,3 +83,5 @@ def send_one_or_multiple(context: CallbackContext, user_id, img_num, pollen_type
     else:
         context.bot.send_media_group(chat_id=user_id,
             media=get_document_list(img_num, pollen_type))
+    context.bot.send_message(chat_id=user_id,
+        text="Quelle: Deutscher Wetterdienst")
