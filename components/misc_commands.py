@@ -18,7 +18,9 @@ def start(update: Update, _: CallbackContext) -> None:
 
 def help_command(update: Update, _: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Mehr Infos zum Bot:\nhttps://paulypeter.github.io/PollenflugBot/')
+    update.message.reply_text(
+        'Mehr Infos zum Bot:\nhttps://paulypeter.github.io/PollenflugBot/\n\nQuelle der Grafiken: Deutscher Wetterdienst'
+    )
 
 def cancel(update: Update, _: CallbackContext) -> None:
     """Cancel current action."""
