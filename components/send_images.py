@@ -33,8 +33,12 @@ def tomorrow(update: Update, context: CallbackContext) -> None:
 
 def sunday(update: Update, context: CallbackContext) -> None:
     """request sunday's forecast"""
-    if datetime.date.today().weekday() != 4:
-        update.message.reply_text("Die Vorhersage gibt es nur freitags.")
+    if (
+        datetime.date.today().weekday() != 4 or
+        datetime.datetime.now().hour < 11 or
+        (datetime.datetime.now().hour == 11 and datetime.datetime.now().minute <= 29)
+    ):
+        update.message.reply_text("Die Vorhersage gibt es nur freitags ab 11:30.")
         return
     user_id = update.message.from_user.id
     handle_day_forecast(update, context, user_id, 3)
@@ -79,3 +83,5 @@ def send_one_or_multiple(context: CallbackContext, user_id, img_num, pollen_type
     else:
         context.bot.send_media_group(chat_id=user_id,
             media=get_document_list(img_num, pollen_type))
+    context.bot.send_message(chat_id=user_id,
+        text="Quelle: Deutscher Wetterdienst")

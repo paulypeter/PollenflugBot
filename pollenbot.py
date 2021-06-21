@@ -61,7 +61,7 @@ def main() -> None:
     #dispatcher.add_handler(CommandHandler("send_daily_img", send_daily_img))
     dispatcher.add_handler(CommandHandler("admin_reset", admin_reset))
     dispatcher.add_handler(CommandHandler("stats", stats))
-    dispatcher.add_handler(CommandHandler("sunday", sunday))
+    dispatcher.add_handler(CommandHandler("Sonntag", sunday))
 
     # define some conversation headers
     dispatcher.add_handler(subscribe_handler)
@@ -83,7 +83,7 @@ def main() -> None:
         hour=5, minute=45, tzinfo=pytz.timezone('Europe/Berlin')))
     job_daily = queue.run_daily(download, days=(0, 1, 2, 3, 4, 5, 6), time=datetime.time(
         hour=11, minute=20, tzinfo=pytz.timezone('Europe/Berlin')))
-    
+
 
     dispatcher.add_error_handler(error_handler)
 

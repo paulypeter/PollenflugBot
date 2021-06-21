@@ -18,7 +18,9 @@ def start(update: Update, _: CallbackContext) -> None:
 
 def help_command(update: Update, _: CallbackContext) -> None:
     """Send a message when the command /help is issued."""
-    update.message.reply_text('Mehr Infos zum Bot:\nhttps://paulypeter.github.io/PollenflugBot/')
+    update.message.reply_text(
+        'Mehr Infos zum Bot:\nhttps://paulypeter.github.io/PollenflugBot/\n\nQuelle der Grafiken: Deutscher Wetterdienst'
+    )
 
 def cancel(update: Update, _: CallbackContext) -> None:
     """Cancel current action."""
@@ -28,7 +30,10 @@ def cancel(update: Update, _: CallbackContext) -> None:
 def download(_: CallbackContext) -> None:
     """download current forecast"""
     cmd = ["./get_pollen_images.sh", "1", "2"]
-    if datetime.date.today().weekday() == 4:
+    if (
+        datetime.date.today().weekday() == 4 and
+        datetime.datetime.now().hour > 10
+    ):
         cmd.append("3")
     subprocess.call(cmd)
 
